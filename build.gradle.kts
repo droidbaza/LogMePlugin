@@ -15,7 +15,7 @@ gradlePlugin {
             displayName = "LogMe Plugin"
             tags = listOf("log","logger")
             description = "Easy logging everything!"
-            implementationClass = "LogMePlugin"
+            implementationClass = "com.github.droidbaza.logmeplugin.LogMePlugin"
         }
     }
 }
