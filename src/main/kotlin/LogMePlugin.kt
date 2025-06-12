@@ -17,6 +17,7 @@ import org.jetbrains.kotlin.ir.expressions.impl.IrBlockBodyImpl
 import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.types.classFqName
+import org.jetbrains.kotlin.ir.util.file
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
@@ -48,8 +49,13 @@ class LogMePlugin : IrGenerationExtension {
                             .first { it.owner.valueParameters.size == 1 }
                     }
 
+                    val fileEntry = declaration.file.fileEntry
+                    val fileName = fileEntry.name.substringAfterLast("/")
+                    val lineNumber = fileEntry.getLineNumber(declaration.startOffset) + 1
+                    val sourceRef = " ($fileName:$lineNumber)"
+
                     val message = irBuilder.irConcat().apply {
-                        val argMsg = "$tag: Called $className.$functionName ${msg ?: ""}"
+                        val argMsg = "$tag: Called $className.$functionName $sourceRef params: ${msg ?: ""}"
                         addArgument(irBuilder.irString(argMsg))
                         if (showArgs) {
                             declaration.valueParameters.forEachIndexed { index, param ->
