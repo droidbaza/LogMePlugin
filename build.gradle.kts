@@ -13,6 +13,7 @@ gradlePlugin {
         create("logMePlugin") {
             id = "com.github.droidbaza.logmeplugin"
             displayName = "LogMe Plugin"
+            tags = listOf("log","logger")
             description = "Easy logging everything!"
             implementationClass = "LogMePlugin"
         }
