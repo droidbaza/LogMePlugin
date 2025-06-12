@@ -11,12 +11,12 @@ import org.jetbrains.kotlin.ir.builders.irGet
 import org.jetbrains.kotlin.ir.builders.irString
 import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
+import org.jetbrains.kotlin.ir.expressions.IrConst
 import org.jetbrains.kotlin.ir.expressions.addArgument
 import org.jetbrains.kotlin.ir.expressions.impl.IrBlockBodyImpl
 import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
 import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.types.classFqName
-import org.jetbrains.kotlin.ir.util.getAnnotationValueOrNull
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
@@ -38,14 +38,14 @@ class LogMePlugin : IrGenerationExtension {
                 if (annotation != null) {
                     val className = declaration.parentClassOrNull?.name?.asString() ?: "TopLevel"
                     val functionName = declaration.name.asString()
-                    val msg = annotation.getAnnotationValueOrNull<String>("msg") ?: ""
-                    val tag = annotation.getAnnotationValueOrNull<String>("tag") ?: "LOG_ME"
-                    val showArgs = annotation.getAnnotationValueOrNull<Boolean>("showArgs") ?: true
+                    val msg = (annotation.getValueArgument(0) as? IrConst)?.value?.toString()
+                    val tag = (annotation.getValueArgument(1) as? IrConst)?.value?.toString() ?: "LOG_ME"
+                    val showArgs = (annotation.getValueArgument(2) as? IrConst)?.value as? Boolean ?: true
                     val irBuilder = DeclarationIrBuilder(pluginContext, declaration.symbol)
 
                     if (printSymbol == null) {
                         printSymbol = pluginContext.referenceFunctions(FqName("kotlin.io.println"))
-                            .find { it.owner.valueParameters.size == 1 }
+                            .first { it.owner.valueParameters.size == 1 }
                     }
 
                     val message = irBuilder.irConcat().apply {

@@ -3,15 +3,15 @@ plugins {
     id("com.gradle.plugin-publish") version "1.3.0"
 }
 
-group = "com.github.droidbaza"
-version = "1.0.0-alpha01"
+group = "org.droidbaza"
+version = "1.0.0-alpha02"
 
 gradlePlugin {
     website = "https://github.com/droidbaza/logmeplugin"
     vcsUrl =  "https://github.com/droidbaza/logmeplugin.git"
     plugins {
         create("logMePlugin") {
-            id = "com.github.droidbaza.logmeplugin"
+            id = "org.droidbaza.logmeplugin"
             displayName = "LogMe Plugin"
             tags = listOf("log","logger")
             description = "Easy logging everything!"
