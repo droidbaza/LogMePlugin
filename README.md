@@ -31,7 +31,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     if (name.contains("Debug")) {
         kotlinOptions {
             freeCompilerArgs += listOf(
-                "-Xplugin=${project.rootDir}/app/libs/logme.jar"
+                "-Xplugin=${project.rootDir}/libs/logme.jar"
             )
         }
     }
@@ -67,7 +67,7 @@ class MyClass {
 
 3.During compilation, the plugin automatically inserts a println call at the beginning of the function body, which outputs to the console:
 ```kotlin
-LOG_ME: Called MyClass.doWork (MyClass.kt:25) params: Important function call param1=42, param2=hello)
+LOG_ME: (MyClass.kt:25) MyClass.doWork Important function call param1=42, param2=hello)
 ```
 
 ## Note
