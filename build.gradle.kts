@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "org.droidbaza"
-version = "1.0.0-alpha01"
+version = "1.0.0-alpha02"
 
 gradlePlugin {
     website = "https://github.com/droidbaza/logmeplugin"
