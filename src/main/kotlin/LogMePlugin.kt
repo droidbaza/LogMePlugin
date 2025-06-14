@@ -52,10 +52,10 @@ class LogMePlugin : IrGenerationExtension {
                     val fileEntry = declaration.file.fileEntry
                     val fileName = fileEntry.name.substringAfterLast("/")
                     val lineNumber = fileEntry.getLineNumber(declaration.startOffset) + 1
-                    val sourceRef = " ($fileName:$lineNumber)"
+                    val sourceRef = "($fileName:$lineNumber)"
 
                     val message = irBuilder.irConcat().apply {
-                        val argMsg = "$tag: Called $className.$functionName $sourceRef params: ${msg ?: ""}"
+                        val argMsg = "$tag:$sourceRef $className.$functionName ${msg ?: ""} "
                         addArgument(irBuilder.irString(argMsg))
                         if (showArgs) {
                             declaration.valueParameters.forEachIndexed { index, param ->
