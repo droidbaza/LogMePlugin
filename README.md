@@ -57,7 +57,7 @@ Zero extra lines of code. Just logs — clean and simple.
 
 ```kotlin
 plugins {
-  id("org.droidbaza.logme") version "1.0.0-alpha03"
+  id("org.droidbaza.logme") version "1.0.0-alpha04"
 }
 ```
 
