@@ -64,7 +64,7 @@ plugins {
 }
 ```
 
-### 2. Use the annotation
+### 2. Copy/past this class to your module
 
 ```kotlin
 @Target(
