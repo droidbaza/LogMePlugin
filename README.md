@@ -1,12 +1,8 @@
 # LogMe 🚀
 
-![Lightweight](https://img.shields.io/badge/Weight-Lightweight-brightgreen)  
-![Easy to Use](https://img.shields.io/badge/Usage-Simple-blue)
+![Lightweight](https://img.shields.io/badge/Weight-Lightweight-brightgreen)  ![Easy to Use](https://img.shields.io/badge/Usage-Simple-blue)
 
 ---
-
-## Intro
-
 ⚡️ LogMe — forget `Log.d()`, live smarter.
 
 If you want to debug like a GOD but hate writing boilerplate — this is your place.
