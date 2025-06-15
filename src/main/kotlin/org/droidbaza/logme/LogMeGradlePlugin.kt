@@ -10,8 +10,8 @@ class LogMeGradlePlugin : Plugin<Project> {
             project.tasks.withType(KotlinCompile::class.java).configureEach {
                 if (it.name.contains("debug", ignoreCase = true)) {
                     val pluginJar = this@LogMeGradlePlugin.javaClass.protectionDomain.codeSource.location.path
-                    it.compilerOptions {
-                        freeCompilerArgs.add("-Xplugin=$pluginJar")
+                    it.kotlinOptions {
+                        freeCompilerArgs += listOf("-Xplugin=$pluginJar")
                     }
                 }
             }
