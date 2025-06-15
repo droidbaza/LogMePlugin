@@ -1,28 +1,62 @@
-# LogMe Plugin
+# LogMe 🚀
 
-![Lightweight](https://img.shields.io/badge/Weight-Lightweight-brightgreen)
+![Lightweight](https://img.shields.io/badge/Weight-Lightweight-brightgreen)  
 ![Easy to Use](https://img.shields.io/badge/Usage-Simple-blue)
 
 ---
 
-## Description
+## Intro
 
-`LogMe` is a lightweight Kotlin IR plugin for automatic generation of function call logs with parameters.
+⚡️ LogMe — forget `Log.d()`, live smarter.
 
----
-
-## Benefits
-
-- **Lightweight**: minimal jar size, low impact on build time.
-- **Easy integration**: just one `.jar` and an annotation.
-- **Automatic parameter logging** — no need to write logs manually.
-- **Call site navigation** — outputs the file and line number where the function is called.
+If you want to debug like a god but hate writing boilerplate — this is your place.
 
 ---
 
-## How to connect
+## 🦾 What is LogMe?
 
-1. Add this plugin to your build using the plugins DSL:(its work only for debug builds).
+It's a Kotlin Compiler Plugin that injects logs straight into your bytecode.  
+You annotate with `@LogMe` — it stitches the logs right in.
+
+No frameworks.  
+No reflection.  
+No pain.
+
+---
+
+## 🤘 What does LogMe do?
+
+- ✅ Automatically logs function calls  
+- ✅ Shows parameters and call site  
+- ✅ Compile-time only — zero runtime overhead  
+- ✅ No reflection — we’re not into that stuff  
+- ✅ Kotlin 2.0 compatible — yeah, we live in 2025
+
+---
+
+## 💣 Example
+
+```kotlin
+@LogMe
+fun hackTheSystem(login: String, password: String) {
+    ...
+}
+```
+
+Here’s what you get:
+
+```
+🚀 LOG_ME:(Hacker.kt:42) hackTheSystem(login="neo", password="1234")
+```
+
+Beautiful, right?  
+Zero extra lines of code. Just logs — clean and simple.
+
+---
+
+## 🧪 3-Step Setup
+
+### 1. Apply the plugin
 
 ```kotlin
 plugins {
@@ -30,9 +64,7 @@ plugins {
 }
 ```
 
-## How to Use
-
-1. Create the annotation:
+### 2. Use the annotation
 
 ```kotlin
 @Target(
@@ -41,13 +73,14 @@ plugins {
 )
 @Retention(AnnotationRetention.SOURCE)
 annotation class LogMe(
-    val msg: String = "",        // additional message
-    val tag: String = "LOG_ME",  // specific log tag
-    val showArgs: Boolean = true // whether to log function parameter values
+    val msg: String = "",
+    val tag: String = "LOG_ME",
+    val showArgs: Boolean = true
 )
 ```
 
-2. Annotate the functions or classes you want to log:
+### 3. Annotate and enjoy
+
 ```kotlin
 class MyClass {
     @LogMe(msg = "Important function call")
@@ -57,13 +90,31 @@ class MyClass {
 }
 ```
 
-3.During compilation, the plugin automatically inserts a println call at the beginning of the function body, which outputs to the console:
-```kotlin
-LOG_ME: (MyClass.kt:25) MyClass.doWork Important function call param1=42, param2=hello)
-```
+---
 
-## Note
-- The plugin uses the Kotlin IR API.
-- It is recommended to enable the plugin only for debug builds to avoid affecting performance and release apk/jar size.
-- Logs are printed to the console using println
+## 🧨 Why LogMe?
 
+- Because we hate boilerplate  
+- Because the compiler can do your dirty work  
+- Because `println("tag")` isn’t logging — it’s despair  
+- Because debugging hurts. And LogMe is aspirin.
+
+---
+
+## 📌 Roadmap
+
+- [ ] Execution time logging  
+- [ ] Filtering by classes, packages, or conditions  
+- [ ] Support for `suspend`, `inline`, and `lambda` functions  
+- [ ] Auto-generated log reports for CI/test pipelines  
+
+---
+
+## 🛎 Support & Contribute
+
+Open an issue, suggest a feature, or send a pull request.  
+**LogMe** is open source — and it’s waiting for you.
+
+---
+
+© MIT License — use it, tweak it, spread the love, and never forget to log 😎
