@@ -9,7 +9,7 @@
 
 ⚡️ LogMe — forget `Log.d()`, live smarter.
 
-If you want to debug like a  but hate writing boilerplate — this is your place.
+If you want to debug like a GOD but hate writing boilerplate — this is your place.
 
 ---
 
