@@ -61,7 +61,7 @@ plugins {
 }
 ```
 
-### 2. Copy/past this class to your module
+### 2. Copy/past this class
 
 ```kotlin
 @Target(
