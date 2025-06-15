@@ -9,7 +9,18 @@
 
 ⚡️ LogMe — forget `Log.d()`, live smarter.
 
-If you want to debug like a god but hate writing boilerplate — this is your place.
+If you want to debug like a  but hate writing boilerplate — this is your place.
+
+---
+
+## 🤘 What does LogMe do?
+
+- ✅ Automatically logs function calls  
+- ✅ Shows parameters and call site  
+- ✅ Compile-time only — zero runtime overhead  
+- ✅ No reflection — we’re not into that stuff  
+- ✅ Kotlin 2.0 compatible — yeah, we live in 2025
+- 🍒 The cherry on top? Clickable link to the exact line of code. Boom — you're there.
 
 ---
 
@@ -21,16 +32,6 @@ You annotate with `@LogMe` — it stitches the logs right in.
 No frameworks.  
 No reflection.  
 No pain.
-
----
-
-## 🤘 What does LogMe do?
-
-- ✅ Automatically logs function calls  
-- ✅ Shows parameters and call site  
-- ✅ Compile-time only — zero runtime overhead  
-- ✅ No reflection — we’re not into that stuff  
-- ✅ Kotlin 2.0 compatible — yeah, we live in 2025
 
 ---
 
@@ -79,7 +80,7 @@ annotation class LogMe(
 )
 ```
 
-### 3. Annotate and enjoy
+### 3. Annotate everything and enjoy
 
 ```kotlin
 class MyClass {
