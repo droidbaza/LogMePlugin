@@ -22,20 +22,12 @@
 
 ## How to connect
 
-1. Add `logme.jar` to your project (recommended only for debug builds, do not include in release builds).
-
-2. In your `build.gradle.kts` or `build.gradle`, add the Kotlin Compiler Plugin with your `.jar` file:
+1. Add this plugin to your build using the plugins DSL:(its work only for debug builds).
 
 ```kotlin
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    if (name.contains("Debug")) {
-        kotlinOptions {
-            freeCompilerArgs += listOf(
-                "-Xplugin=${project.rootDir}/app/libs/logme.jar"
-            )
-        }
-    }
-} 
+plugins {
+  id("org.droidbaza.logme") version "1.0.0-alpha03"
+}
 ```
 
 ## How to Use
@@ -67,7 +59,7 @@ class MyClass {
 
 3.During compilation, the plugin automatically inserts a println call at the beginning of the function body, which outputs to the console:
 ```kotlin
-LOG_ME: Called MyClass.doWork (MyClass.kt:25) params: Important function call param1=42, param2=hello)
+LOG_ME: (MyClass.kt:25) MyClass.doWork Important function call param1=42, param2=hello)
 ```
 
 ## Note
