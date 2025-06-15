@@ -1,6 +1,5 @@
-package com.github.droidbaza.logmeplugin
+package org.droidbaza.logme
 
-import org.jetbrains.kotlin.backend.common.extensions.FirIncompatiblePluginAPI
 import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.backend.common.lower.DeclarationIrBuilder
@@ -15,22 +14,19 @@ import org.jetbrains.kotlin.ir.expressions.IrConst
 import org.jetbrains.kotlin.ir.expressions.addArgument
 import org.jetbrains.kotlin.ir.expressions.impl.IrBlockBodyImpl
 import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
-import org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI
 import org.jetbrains.kotlin.ir.types.classFqName
 import org.jetbrains.kotlin.ir.util.file
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
+import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.name.FqName
+import org.jetbrains.kotlin.name.Name
 
-class LogMePlugin : IrGenerationExtension {
+class LogMeExtension : IrGenerationExtension {
 
     private var printSymbol: IrSimpleFunctionSymbol? = null
 
-    @OptIn(
-        FirIncompatiblePluginAPI::class,
-        UnsafeDuringIrConstructionAPI::class
-    )
     override fun generate(moduleFragment: IrModuleFragment, pluginContext: IrPluginContext) {
         moduleFragment.transformChildrenVoid(object : IrElementTransformerVoid() {
             override fun visitFunction(declaration: IrFunction): IrStatement {
@@ -45,10 +41,10 @@ class LogMePlugin : IrGenerationExtension {
                     val irBuilder = DeclarationIrBuilder(pluginContext, declaration.symbol)
 
                     if (printSymbol == null) {
-                        printSymbol = pluginContext.referenceFunctions(FqName("kotlin.io.println"))
-                            .first { it.owner.valueParameters.size == 1 }
+                        val callableId = CallableId(FqName("kotlin.io"), Name.identifier("println"))
+                        printSymbol = pluginContext.referenceFunctions(callableId)
+                            .firstOrNull()
                     }
-
                     val fileEntry = declaration.file.fileEntry
                     val fileName = fileEntry.name.substringAfterLast("/")
                     val lineNumber = fileEntry.getLineNumber(declaration.startOffset) + 1
